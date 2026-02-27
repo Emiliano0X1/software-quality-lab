@@ -28,10 +28,6 @@ public class EmailValidatorService {
         String user = emailParts[0];
         String provider_domain = emailParts[1];
 
-        if(user.isEmpty() || provider_domain.isEmpty()){
-            return false;
-        }
-
         //2 Check if the user has valid characters
         if(!userEmailHasValidChars(user)){
             return false;
@@ -75,12 +71,6 @@ public class EmailValidatorService {
             if(Character.isUpperCase(c)){
                 return false;
             }
-
-            if(!Character.isLetterOrDigit(c)) {
-                if(!validChars.contains(c)) {
-                    return false;
-                }
-            }
         }
         return true;
     }
@@ -112,7 +102,7 @@ public class EmailValidatorService {
 
         if(email.contains("#")){
             String[] splitedEmail = email.split("#");
-            if(splitedEmail.length <= 1){
+            if(splitedEmail[0].isEmpty()){
                 return new String[0];
             }
 

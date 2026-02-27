@@ -32,6 +32,13 @@ public class EmailValidatorServiceTest {
     }
 
     @Test
+    void shouldReturnFalse_WhenUserSizeIsMinor2(){
+        EmailValidatorService emailValidate = new EmailValidatorService();
+        var isValid = emailValidate.isValid("c@#gmail.com4");
+        assertFalse(isValid);
+    }
+
+    @Test
     void shouldReturnFalse_WhenEmailHasInvalidCharacters(){
         EmailValidatorService emailValidate = new EmailValidatorService();
         var isValid = emailValidate.isValid("#$%lo4#gmail.com");
@@ -58,6 +65,14 @@ public class EmailValidatorServiceTest {
         var isValid = emailValidate.isValid("emiliano4@gmail.com");
         assertFalse(isValid);
     }
+
+    @Test
+    void shouldReturnFalse_WhenUserDoesNotExist(){
+        EmailValidatorService emailValidate = new EmailValidatorService();
+        var isValid = emailValidate.isValid("#gmail.com");
+        assertFalse(isValid);
+    }
+
 
     @Test
     void shouldReturnFalse_WhenEmailStartsWithDiptongo(){
