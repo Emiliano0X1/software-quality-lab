@@ -8,6 +8,7 @@ public class EmailValidatorService {
 
     private Set<Character> validChars = new HashSet<>(Arrays.asList('_','.','+','-','#'));
     private Set<Character> validUserChars = new HashSet<>(Arrays.asList('_','-','.','+'));
+    private Set<Character> vowels = new HashSet<>(Arrays.asList('a','e','i','o','u'));
 
     public boolean isValid(String email) {
         if(email == null || email.isEmpty()){
@@ -113,12 +114,13 @@ public class EmailValidatorService {
     }
 
     private boolean userHasDiptongo(String user) {
-        if(user.length() < 2){
-            return true;
-        }
+        for (int i = 1; i < user.length() ; i++){
+            char firstChar = user.charAt(i - 1);
+            char secondChar = user.charAt(i);
 
-        if(user.charAt(0) == user.charAt(1)){
-            return true;
+            if(vowels.contains(firstChar) && vowels.contains(secondChar)){
+                return true;
+            }
         }
 
         return false;
