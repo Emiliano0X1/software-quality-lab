@@ -1,10 +1,9 @@
 package mx.edu.cetys.software_quality_lab.poc;
 
-import mx.edu.cetys.software_quality_lab.validators.EmailValidatorService;
+import validators.EmailValidatorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -75,6 +74,9 @@ public class MockitoListTests {
        // assertTrue(emailValidatorServiceMock.isValid(""));
 
     }
+
+
+
 
 
 

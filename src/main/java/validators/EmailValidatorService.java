@@ -1,4 +1,4 @@
-package mx.edu.cetys.software_quality_lab.validators;
+package validators;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import validators.EmailValidatorService;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -83,7 +86,7 @@ public class EmailValidatorServiceTest {
 
     @Test
     void shouldReturnFalse_WhenEmailDomainIsNotProperLength(){
-        var isValid = emailValidate.isValid("emiliano4#gmail.commer");
+        var isValid = emailValidate.isValid("emilano4#gmail.commer");
         assertFalse(isValid);
     }
 
@@ -103,5 +106,17 @@ public class EmailValidatorServiceTest {
     void shouldReturnTrue_WhenEmailIsValid(){
         var isValid = emailValidate.isValid("emil-_i+ano4#gmal.com");
         assertTrue(isValid);
+    }
+
+    @DisplayName("Validate Bad Emails")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "#gmail.com",
+            "emilano4#gmail.commer",
+            "emilino4#gmil/.com",
+    })
+    void invalidEmails(String email){
+        var isValid = emailValidate.isValid(email);
+        assertFalse(isValid);
     }
 }
