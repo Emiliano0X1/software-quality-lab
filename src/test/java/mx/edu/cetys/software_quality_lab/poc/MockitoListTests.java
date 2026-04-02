@@ -1,6 +1,6 @@
 package mx.edu.cetys.software_quality_lab.poc;
 
-import validators.EmailValidatorService;
+import mx.edu.cetys.software_quality_lab.validators.EmailValidatorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
