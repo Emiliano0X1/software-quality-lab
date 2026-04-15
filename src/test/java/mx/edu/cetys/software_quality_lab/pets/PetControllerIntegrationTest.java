@@ -76,6 +76,9 @@ public class PetControllerIntegrationTest {
 
     }
 
+    // TODO integration test for 404 like .andExpect(status().isCreated())
+    // but for 404, 400 (invalid input), etc.
+
 
 
 

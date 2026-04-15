@@ -21,7 +21,10 @@ public class PetService {
         log.info("Starting pet Request Validation, requestPet={}", requestPet);
         //TODO VALIDATION
         //Name length > 2
+        //TODO regresar un 400 - Invalid Data si no se cumple la validacion
         //Age > 0
+        //TODO regresar un 400
+
         // Color is not empty (extra validation from the teacher)
 
         var savedPet = petRepository.save(new Pet(requestPet.name(), requestPet.race(), requestPet.color(), requestPet.age()));

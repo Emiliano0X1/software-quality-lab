@@ -48,6 +48,10 @@ public class PetServiceTest {
         // - Salvar a la BD, y la base datos nos regresa el mismo Pet
     }
 
+    // TODO SAVE PET _ invalid data
+
+    //TODO get by ID, - get of id 1- is not in DB
+
     @Test
     void getAllPets(){
         //Recibir la peticion desde el controller GetAll

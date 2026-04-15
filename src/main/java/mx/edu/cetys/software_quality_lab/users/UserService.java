@@ -24,10 +24,31 @@ public class UserService {
 
     //CREATE
     UserController.UserResponse saveUser(UserController.UserRequest userRequest) {
-        //username length
-        //age limits
-        //email validation Just have @ and .com ending
-        //password length and has a number
+        log.info("Saving user: {}", userRequest);
+
+        if(userRequest.username().isEmpty()){
+            throw new IllegalArgumentException("The username cannot be empty");
+        }
+
+        if(userRequest.username().length() < 3){
+            throw new IllegalArgumentException("The username must be at least 3 characters");
+        }
+
+        if(userRequest.age() <= 0){
+            throw new IllegalArgumentException("The age must be at least 1");
+        }
+
+        if(!userRequest.email().contains("@gmail.com")){
+            throw new IllegalArgumentException("The email address must contain @gmail.com to be valid");
+        }
+
+        if(userRequest.password().length() < 4){
+            throw new IllegalArgumentException("The password must be at least 4 characters");
+        }
+
+        if(!hasNumber(userRequest.password())){
+            throw new IllegalArgumentException("The password must have a number on it");
+        }
 
         var savedUser =  new User(userRequest.email(), userRequest.password(), userRequest.username(), userRequest.age(), userRequest.synopsis());
         userRepository.save(savedUser);
@@ -62,7 +83,13 @@ public class UserService {
             throw new IllegalArgumentException("The user with user_id: " + user_id + " does not exist");
         }
 
-        //TODO Validate newUserName
+        if(newUsername.isEmpty()){
+            throw new IllegalArgumentException("The username cannot be empty");
+        }
+
+        if(newUsername.length() < 3){
+            throw new IllegalArgumentException("The username must be at least 3 characters");
+        }
         User updatedUser = existUser.get();
         updatedUser.setUsername(newUsername);
         userRepository.save(updatedUser);
@@ -75,7 +102,14 @@ public class UserService {
             throw new IllegalArgumentException("The user with user_id: " + user_id + " does not exist" );
         }
 
-        //TODO validate new Password
+        if(newPassword.length() < 4){
+            throw new IllegalArgumentException("The password must be at least 4 characters");
+        }
+
+        if(!hasNumber(newPassword)){
+            throw new IllegalArgumentException("The password must have a number on it");
+        }
+
         User user = existUser.get();
         user.setPassword(newPassword);
         userRepository.save(user);
@@ -91,5 +125,14 @@ public class UserService {
 
         userRepository.delete(existUser.get());
         return new UserController.UserResponse(user_id,null,null,null,null);
+    }
+
+    private boolean hasNumber(String password){
+        for (Character c : password.toCharArray()) {
+            if(Character.isDigit(c)){
+                return true;
+            }
+        }
+        return false;
     }
 }

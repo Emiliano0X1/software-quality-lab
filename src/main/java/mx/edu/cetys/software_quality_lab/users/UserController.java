@@ -12,11 +12,12 @@ import java.util.List;
 public class UserController {
 
     //HTTP Verbs : POST , GET, PUT, PATCH, DELETE
-    // GET localhost : 8080 /pets --- TODOS los users, TODO pagination
-    // GET localhost : 8080 /pets/{username} --- User by username
-    // POST localhost : 8080 /pets --- Nuevo User - Request Body {json body}
-    // PUT localhost : 8080 /pets/{email} -- Actualizar User by email unique
-    // DELETE localhost : 8080 / pets /{email} --- /Flag available yes/no
+    // GET localhost : 8080 /users --- TODOS los users, TODO pagination
+    // GET localhost : 8080 /users/{username} --- User by username
+    // POST localhost : 8080 /users/create --- Nuevo User - Request Body {json body}
+    // PATCH localhost : 8080 /users/{user_id}?username=? -- Actualizar Username by id
+    // PATCH localhost : 8080 /users/{user_id}?password=? -- Actualizar password by id
+    // DELETE localhost : 8080 /users/{user_id}
 
     @Autowired
     private final UserService userService;
