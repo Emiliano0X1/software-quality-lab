@@ -1,7 +1,10 @@
 package mx.edu.cetys.software_quality_lab.pets;
 
+import mx.edu.cetys.software_quality_lab.commons.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pets")
@@ -25,7 +28,6 @@ public class PetController {
     record PetResponse(Long id, String name, String color, String race, Integer age){};
 
     //Response Generic Wrapper to include info in all APIs
-    record ApiResponse<T> (String info, T response, String error){}
     public record PetWrapper(PetResponse pet){}
 
     @GetMapping("/help")
@@ -37,6 +39,13 @@ public class PetController {
     @ResponseStatus(HttpStatus.CREATED)
     ApiResponse<PetWrapper> createPet(@RequestBody PetController.PetRequest requestPet){
         return new ApiResponse<>("New pet created", new PetWrapper(petService.savePet(requestPet)),null);
+    }
+
+    @GetMapping("/{petId}")
+    @ResponseStatus(HttpStatus.OK)
+    ApiResponse <PetWrapper> findPetById(@PathVariable("petId") Long petId){
+        var pet = petService.getPetById(petId);
+        return new ApiResponse<>("Pet found", new PetWrapper(pet),null);
     }
 
 

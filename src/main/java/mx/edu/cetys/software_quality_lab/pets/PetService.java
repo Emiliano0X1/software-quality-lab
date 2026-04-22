@@ -1,6 +1,7 @@
 package mx.edu.cetys.software_quality_lab.pets;
 
 import mx.edu.cetys.software_quality_lab.pets.exceptions.InvalidPetDataException;
+import mx.edu.cetys.software_quality_lab.pets.exceptions.NotFoundPetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,32 @@ public class PetService {
 
         var savedPet = petRepository.save(new Pet(requestPet.name(), requestPet.race(), requestPet.color(), requestPet.age()));
         return new PetController.PetResponse(savedPet.getId(),savedPet.getName(),savedPet.getColor(), savedPet.getRace(), savedPet.getAge());
+    }
+
+    public PetController.PetResponse getPetById(Long petId){
+        log.info("Starting Pet request validations, petId={}", petId);
+        var petFromDB = petRepository.findById(petId);
+
+        //what if the petFromDB is null? or empty or not founf?
+        //Do we throw an exception or hanlde it by the controller Advice? YES
+
+        if(!petFromDB.isPresent()){
+            throw new NotFoundPetException("The pet with id : " + petId + " wasnt found");
+        }
+
+        var realPet = petFromDB.get();
+        return getPetResponseManager(realPet);
+
+    }
+
+    private PetController.PetResponse getPetResponseManager(Pet realPet){
+        return new PetController.PetResponse(
+                realPet.getId(),
+                realPet.getName(),
+                realPet.getColor(),
+                realPet.getRace(),
+                realPet.getAge()
+        );
     }
 
 
