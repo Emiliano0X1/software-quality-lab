@@ -23,10 +23,6 @@ public class PetController {
         this.petService = petService;
     }
 
-    //DTO (Data Transfer Object)
-    record PetRequest(String name, String color, String race, Integer age){};
-    record PetResponse(Long id, String name, String color, String race, Integer age){};
-
     //Response Generic Wrapper to include info in all APIs
     public record PetWrapper(PetResponse pet){}
 
@@ -44,11 +40,24 @@ public class PetController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ApiResponse<PetWrapper> createPet(@RequestBody PetController.PetRequest requestPet){
+    ApiResponse<PetWrapper> createPet(@RequestBody PetRequest requestPet){
         return new ApiResponse<>("New pet created", new PetWrapper(petService.savePet(requestPet)),null);
     }
 
     //TODO - PUT AND DELETE
+
+    @PutMapping("/update/{pedId}")
+    @ResponseStatus(HttpStatus.OK)
+    ApiResponse<PetWrapper> updatePet(@PathVariable("petId") Long petId, @RequestBody PetRequest requestPet){
+        return new ApiResponse<>("Pet with ID : " + petId + "updated", new PetWrapper(petService.updatePet(petId,requestPet)),null);
+    }
+
+    @DeleteMapping("/delete/{petId}")
+    @ResponseStatus(HttpStatus.OK)
+    ApiResponse<PetWrapper> deletePet(@PathVariable("petId") Long petId){
+        return new ApiResponse<>("Pet with ID : " + petId + "updated", new PetWrapper(petService.deletePet(petId)),null);
+
+    }
 
 
 

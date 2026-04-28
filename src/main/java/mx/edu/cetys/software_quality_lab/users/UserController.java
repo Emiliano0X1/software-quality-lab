@@ -26,9 +26,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    //DTO
-    record UserRequest(String email, String password, String username, Integer age, String synopsis) {}
-    record UserResponse(Long id, String email, String username, Integer age, String synopsis) {}
 
     //Response Generic Wrapper to include info in all APIs
     record ApiResponse<T> (String message, T data, String error) {}

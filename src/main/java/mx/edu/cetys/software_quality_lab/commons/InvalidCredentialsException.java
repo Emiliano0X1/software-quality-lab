@@ -1,4 +1,4 @@
-package mx.edu.cetys.software_quality_lab.commons.exceptions;
+package mx.edu.cetys.software_quality_lab.commons;
 
 public class InvalidCredentialsException extends RuntimeException {
     public InvalidCredentialsException(String message) {

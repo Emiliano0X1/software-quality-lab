@@ -1,12 +1,6 @@
 package mx.edu.cetys.software_quality_lab.commons;
 
-import mx.edu.cetys.software_quality_lab.commons.exceptions.AlreadyExistsException;
-import mx.edu.cetys.software_quality_lab.commons.exceptions.InvalidCredentialsException;
-import mx.edu.cetys.software_quality_lab.commons.exceptions.InvalidDataException;
-import mx.edu.cetys.software_quality_lab.commons.exceptions.NotFoundException;
-import mx.edu.cetys.software_quality_lab.pets.exceptions.InvalidPetDataException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

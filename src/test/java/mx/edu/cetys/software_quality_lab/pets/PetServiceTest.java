@@ -1,6 +1,6 @@
 package mx.edu.cetys.software_quality_lab.pets;
 
-import mx.edu.cetys.software_quality_lab.pets.exceptions.InvalidPetDataException;
+import mx.edu.cetys.software_quality_lab.commons.InvalidDataException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -59,9 +59,9 @@ public class PetServiceTest {
 
      @Test
      void savePet_InvalidName_ExceptionExpected(){
-         var petRequest = new PetController.PetRequest("L","Negro","Perro",20);
+         var petRequest = new PetRequest("L","Negro","Perro",20);
 
-         assertThrows(InvalidPetDataException.class, () -> petService.savePet(petRequest));
+         assertThrows(InvalidDataException.class, () -> petService.savePet(petRequest));
      }
 
     //TODO get by ID, - get of id 1- is not in DB
