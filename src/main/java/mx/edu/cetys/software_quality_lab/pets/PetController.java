@@ -35,18 +35,20 @@ public class PetController {
         return new ApiResponse<>("This is the help API", null,null);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    ApiResponse<PetWrapper> createPet(@RequestBody PetController.PetRequest requestPet){
-        return new ApiResponse<>("New pet created", new PetWrapper(petService.savePet(requestPet)),null);
-    }
-
     @GetMapping("/{petId}")
     @ResponseStatus(HttpStatus.OK)
     ApiResponse <PetWrapper> findPetById(@PathVariable("petId") Long petId){
         var pet = petService.getPetById(petId);
         return new ApiResponse<>("Pet found", new PetWrapper(pet),null);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    ApiResponse<PetWrapper> createPet(@RequestBody PetController.PetRequest requestPet){
+        return new ApiResponse<>("New pet created", new PetWrapper(petService.savePet(requestPet)),null);
+    }
+
+    //TODO - PUT AND DELETE
 
 
 
